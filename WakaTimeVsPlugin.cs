@@ -2,7 +2,7 @@
 using EnvDTE;
 using EnvDTE80;
 
-namespace WakaTime
+namespace WakaTime.VisualStudio
 {
     class WakaTimeVsPlugin : WakaTimeIdePlugin<DTE2>
     {

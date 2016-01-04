@@ -1,7 +1,7 @@
 ﻿// PkgCmdID.cs
 // MUST match PkgCmdID.h
 
-namespace WakaTime
+namespace WakaTime.VisualStudio
 {
     static class PkgCmdIdList
     {

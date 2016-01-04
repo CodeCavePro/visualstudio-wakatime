@@ -2,7 +2,7 @@
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 
-namespace WakaTime
+namespace WakaTime.VisualStudio
 {
     class LogService : ILogService
     {

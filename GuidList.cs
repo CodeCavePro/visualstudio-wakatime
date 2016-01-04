@@ -1,8 +1,9 @@
 ﻿// Guids.cs
 // MUST match guids.h
+
 using System;
 
-namespace WakaTime
+namespace WakaTime.VisualStudio
 {
     static class GuidList
     {
