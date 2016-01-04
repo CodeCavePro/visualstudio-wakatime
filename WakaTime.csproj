@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
-    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <FileUpgradeFlags>
@@ -10,6 +10,21 @@
     </UpgradeBackupLocation>
     <OldToolsVersion>12.0</OldToolsVersion>
     <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Express|AnyCPU'">
     <DebugSymbols>false</DebugSymbols>
@@ -122,6 +137,9 @@
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WakaTime">
+      <HintPath>packages\WakaTime.8.0.0\lib\net45\WakaTime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="EnvDTE">
@@ -171,40 +189,15 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\ApiKeyForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ApiKeyForm.Designer.cs">
-      <DependentUpon>ApiKeyForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WakaTimeConstants.cs" />
-    <Compile Include="ProcessorArchitectureHelper.cs" />
-    <Compile Include="PythonCliParameters.cs" />
-    <Compile Include="PythonManager.cs" />
-    <Compile Include="Forms\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Downloader.cs" />
-    <Compile Include="Logger.cs" />
-    <Compile Include="WakaTimeConfigFile.cs" />
+    <Compile Include="LogService.cs" />
     <Compile Include="GuidList.cs" />
-    <Compile Include="NativeMethods.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="RunProcess.cs" />
     <Compile Include="WakaTimePackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PkgCmdID.cs" />
+    <Compile Include="WakaTimeVsPlugin.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\ApiKeyForm.resx">
-      <DependentUpon>ApiKeyForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="VSPackage.resx">
       <MergeWithCTO>true</MergeWithCTO>
       <ManifestResourceName>VSPackage</ManifestResourceName>
@@ -241,6 +234,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <PropertyGroup>
     <UseCodebase>true</UseCodebase>

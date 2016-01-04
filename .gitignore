@@ -73,3 +73,6 @@ bld/
 **/*.Server/ModelManifest.xml
 _Pvt_Extensions
 /source.extension.vsixmanifest
+
+# Exclude NuGet packages
+packages
