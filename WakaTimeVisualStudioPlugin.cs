@@ -1,10 +1,11 @@
 ﻿using System;
 using EnvDTE;
 using EnvDTE80;
+using WakaTime.VisualStudio.Forms;
 
 namespace WakaTime.VisualStudio
 {
-    class WakaTimeVsPlugin : WakaTimeIdePlugin<DTE2>
+    class WakaTimeVisualStudioPlugin : WakaTimeIdePlugin<DTE2>
     {
         private DocumentEvents _docEvents;
         private WindowEvents _windowEvents;
@@ -14,7 +15,7 @@ namespace WakaTime.VisualStudio
         private EditorInfo _editorInfo;
         private bool _disposed;
 
-        public WakaTimeVsPlugin(DTE2 editor) : base(editor)
+        public WakaTimeVisualStudioPlugin(DTE2 editor) : base(editor)
         { }
 
         public override ILogService GetLogger()
@@ -48,6 +49,22 @@ namespace WakaTime.VisualStudio
             return (editorObj.Solution == null)
                 ? null
                 : editorObj.Solution.FullName;
+        }
+
+        public override void PromptApiKey()
+        {
+            using (var apiKeyFrom = new ApiKeyForm())
+            {
+                apiKeyFrom.ShowDialog();
+            }
+        }
+
+        public override void SettingsPopup()
+        {
+            using (var apiKeyFrom = new SettingsForm())
+            {
+                apiKeyFrom.ShowDialog();
+            }
         }
 
         public override void Dispose(bool disposing)

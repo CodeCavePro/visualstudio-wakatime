@@ -18,8 +18,7 @@ namespace WakaTime.VisualStudio
         #region Fields
 
         private static DTE2 _objDte;
-        private static WakaTimeVsPlugin _idePlugin;
-        private bool _disposed;
+        private static WakaTimeVisualStudioPlugin _idePlugin;
 
         #endregion
 
@@ -36,7 +35,7 @@ namespace WakaTime.VisualStudio
         private void InitializeAsync()
         {
             _objDte = (DTE2)GetService(typeof(DTE));
-            _idePlugin = new WakaTimeVsPlugin(_objDte);
+            _idePlugin = new WakaTimeVisualStudioPlugin(_objDte);
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
             var mcs = GetService(typeof(IMenuCommandService)) as OleMenuCommandService;
@@ -58,10 +57,7 @@ namespace WakaTime.VisualStudio
 
         #region Properties
 
-        public bool IsDisposed
-        {
-            get { return _disposed; }
-        }
+        public bool Disposed { get; private set; }
 
         #endregion
 
@@ -81,7 +77,7 @@ namespace WakaTime.VisualStudio
 
         protected override void Dispose(bool disposing)
         {
-            if (_disposed)
+            if (Disposed)
                 return;
 
             if (disposing)
@@ -90,7 +86,7 @@ namespace WakaTime.VisualStudio
                     _idePlugin.Dispose();
             }
 
-            _disposed = true;
+            Disposed = true;
         }
 
         public void Dispose() // Implement IDisposable
