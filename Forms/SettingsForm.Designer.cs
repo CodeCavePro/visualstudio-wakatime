@@ -1,4 +1,4 @@
-﻿namespace WakaTime.VisualStudio.Forms
+﻿namespace WakaTime.Forms
 {
     partial class SettingsForm
     {
