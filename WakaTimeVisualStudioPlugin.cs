@@ -37,7 +37,7 @@ namespace WakaTime.VisualStudio
                     Name = "visualstudio",
                     Version = Version.Parse(editorObj.Version),
                     PluginName = "visualstudio-wakatime",
-                    PluginVersion = typeof(EditorInfo).Assembly.GetName().Version
+                    PluginVersion = typeof(WakaTimeVisualStudioPlugin).Assembly.GetName().Version
                 };
             }
 
