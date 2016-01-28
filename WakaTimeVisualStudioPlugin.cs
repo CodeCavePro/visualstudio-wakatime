@@ -74,10 +74,21 @@ namespace WakaTime.VisualStudio
 
             if (disposing)
             {
-                _docEvents.DocumentOpened -= DocEventsOnDocumentOpened;
-                _docEvents.DocumentSaved -= DocEventsOnDocumentSaved;
-                _windowEvents.WindowActivated -= WindowEventsOnWindowActivated;
-                _solutionEvents.Opened -= SolutionEventsOnOpened;
+                if (_docEvents != null)
+                {
+                    _docEvents.DocumentOpened -= DocEventsOnDocumentOpened;
+                    _docEvents.DocumentSaved -= DocEventsOnDocumentSaved;
+                }
+
+                if (_windowEvents != null)
+                {
+                    _windowEvents.WindowActivated -= WindowEventsOnWindowActivated;
+                }
+
+                if (_solutionEvents != null)
+                {
+                    _solutionEvents.Opened -= SolutionEventsOnOpened;
+                }
             }
 
             _disposed = true;
