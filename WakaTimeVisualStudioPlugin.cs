@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Net;
 using EnvDTE;
 using EnvDTE80;
 using WakaTime.VisualStudio.Forms;
+using System.Windows.Forms;
 
 namespace WakaTime.VisualStudio
 {
-    class WakaTimeVisualStudioPlugin : WakaTimeIdePlugin<DTE2>
+    class WakaTimeVisualStudioPlugin : WakaTimeIdePlugin<DTE2>, IWin32Window
     {
         private DocumentEvents _docEvents;
         private WindowEvents _windowEvents;
@@ -14,6 +16,15 @@ namespace WakaTime.VisualStudio
         private ILogService _logService;
         private EditorInfo _editorInfo;
         private bool _disposed;
+
+        public IntPtr Handle
+        {
+            get
+            {
+                // Wraps the Win32 handle of the Visual Studio main window
+                return new IntPtr(editorObj.MainWindow.HWnd);
+            }
+        }
 
         public WakaTimeVisualStudioPlugin(DTE2 editor) : base(editor)
         { }
@@ -42,6 +53,11 @@ namespace WakaTime.VisualStudio
             }
 
             return _editorInfo;
+        }
+
+        public override IDownloadProgressReporter GetReporter()
+        {
+            return new DownloadProgressForm(this);
         }
 
         public override string GetActiveSolutionPath()

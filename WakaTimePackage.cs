@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio.Shell;
-using Task = System.Threading.Tasks.Task;
+using System.Windows.Forms;
 
 namespace WakaTime.VisualStudio
 {
@@ -26,15 +26,15 @@ namespace WakaTime.VisualStudio
 
         protected override void Initialize()
         {
-            Task.Run(() =>
+            _objDte = (DTE2)GetService(typeof(DTE));
+            _objDte.Events.DTEEvents.OnStartupComplete += () =>
             {
                 InitializeAsync();
-            });
+            };
         }
 
         private void InitializeAsync()
         {
-            _objDte = (DTE2)GetService(typeof(DTE));
             _idePlugin = new WakaTimeVisualStudioPlugin(_objDte);
 
             // Add our command handlers for menu (commands must exist in the .vsct file)
